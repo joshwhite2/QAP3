@@ -1,0 +1,11 @@
+{
+  "name": "qap3",
+  "version": "1.0.0",
+  "description": "QAP3 for Fullstack and DB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Josh White",
+  "license": "ISC"
+}
