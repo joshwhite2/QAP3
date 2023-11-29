@@ -1,0 +1,29 @@
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+    <body>
+        <%- include('./partials/nav.ejs') %>
+        <div class="actors content">
+            <form action="/actors" method="POST">
+                <b>Actors: </b></br> 
+            <% if (theActors.length > 0) { %>
+                <% theActors.forEach(actor => { %>
+                    <b><%= actor.first_name %> <%= actor.last_name %></b>
+                    <a href="/artists/<%=artist._id%>/edit?Name=<%=actor.actor_name%>">edit</a>
+                    <a href="/artists/<%=artist._id%>/delete?Name=<%=actor.actor_name%>">edit</a>
+                    <a href="/artists/<%=artist._id%>/replace?Name=<%=actor.actor_name%>">edit</a>
+
+                    </br>
+                    <% }) %>
+            <% } %>
+            </br><label>Add Artist:</label></br>
+            <label>Name:
+                <input type="text" id="artistName" name="Name" value="<%= locals.Name %>" required>
+            </label>
+           
+            </br>
+            <button>POST</button>
+        </form>
+        </div>
+    </body>
+    <%- include('./partials/foot.ejs') %>
+</html>
