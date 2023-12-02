@@ -5,7 +5,7 @@
         <div class="create content">
             <form action="/artists/<%= locals.theId %>?_method=DELETE" method="POST">
                 <label>Are you sure you want to delete this Artist?</br>
-                    <input type="text" id="<%= locals.theId %>" name="artist" value="<%= locals.name %> " readonly>
+                    <%= locals.theName %>
                 </label>
                 <button>DELETE</button>
             </form>

@@ -4,7 +4,7 @@ const dal = require("./InterwebMusicDataBase_db");
 var getArtists = function() {
   if(DEBUG) console.log("artists.pg.dal.getArtists()");
   return new Promise(function(resolve, reject) {
-    const sql = "SELECT artist_id AS _id, artist_name FROM artist \
+    const sql = "SELECT artist_id AS _id, artist_name, artist_birthday, artist_location, label_id FROM artist \
         ORDER BY artist_id DESC LIMIT 7;"
     dal.query(sql, [], (err, result) => {
       if (err) {

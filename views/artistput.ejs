@@ -3,7 +3,7 @@
     <body>
         <%- include('./partials/nav.ejs') %>
         <div class="create content">
-            <form action="/actors/<%= locals.theId %>?_method=PUT" method="POST">
+            <form action="/artists/<%= locals.theId %>?_method=PUT" method="POST">
                 <label>Replace Artist Names:</br>
                     <input type="text" name="firstName" value="<%= locals.firstName %>" required>
                    

@@ -7,13 +7,33 @@ const albumsDal = require('../services/pg.albums.dal')
 router.get('/', async (req, res) => {
    
     try {
-        let thealbums = await albumsDal.getAlbums(); 
+        let theAlbums = await albumsDal.getAlbums(); 
         if(DEBUG) console.table(theAlbums);
         res.render('albums', {theAlbums});
     } catch {
         res.render('503');
     }
 });
+
+router.get('/:id', async (req, res) => {
+   
+    try {
+        const anAlbum = await albumsDal.getAlbumByAlbumId(req.params.id); // from postgresql
+        if(DEBUG) console.log(`albums.router.get/:name ${anAlbum}`);
+        if (anAlbum)
+            res.render('album', {anAlbum});
+        else
+            res.render('norecord');
+    } catch {
+        res.render('503');
+    }
+});
+
+router.get('/:id/replace', async (req, res) => {
+    if(DEBUG) console.log('album.Replace : ' + req.params.id);
+    res.render('albumPut.ejs', {Name: req.query.album_name, Artist: req.query.artist_name, Year: req.query.album_year,  theId: req.params.id});
+});
+
 
 router.get('/:id', async (req, res) => {
    
@@ -28,11 +48,10 @@ router.get('/:id', async (req, res) => {
         res.render('503');
     }
 });
-
-router.get('/:id/replace', async (req, res) => {
-    if(DEBUG) console.log('album.Replace : ' + req.params.id);
-    res.render('albumPut.ejs', {Name: req.query.album_name,  theId: req.params.id});
-});
+// router.get('/:id/replace', async (req, res) => {
+//     if(DEBUG) console.log('album.Replace : ' + req.params.id);
+//     res.render('albumPut.ejs', {Name: req.query.album_name,  theId: req.params.id});
+// });
 
 // https://localhost:3000/albums/205/edit
 router.get('/:id/edit', async (req, res) => {
@@ -48,7 +67,7 @@ router.get('/:id/delete', async (req, res) => {
 router.post('/', async (req, res) => {
     if(DEBUG) console.log("albums.POST");
     try {
-        await albumsDal.addAlbum(req.body.album_name, );
+        await albumsDal.addAlbum(req.body.album_name, req.body.artist_name, req.body.album_year, req.body.publisher_id);
         res.redirect('/albums/');
     } catch {
         // log this error to an error log file.
@@ -62,7 +81,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     if(DEBUG) console.log('albums.PUT: ' + req.params.id);
     try {
-        await albumsDal.putAlbum(req.params.id, req.body.album_ame) ;
+        await albumsDal.putAlbum(req.params.id, req.body.album_name, req.body.artist_name, req.body.album_year, req.body.publisher_id); ;
         res.redirect('/albums/');
     } catch {
         // log this error to an error log file.
