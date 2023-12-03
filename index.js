@@ -10,11 +10,9 @@ app.use(express.urlencoded({ extended: true, })); // This is important!
 app.use(methodOverride('_method')); // So is this!
 
 app.get('/', (req, res) => {
-    res.render('index.ejs', { name: 'Cassian Andor'});
+    res.render('index.ejs', { name: 'Ladies Who Rocked the 80s'});
 });
-app.get('/about', (request, response) => {
-    response.render('about.ejs');
-});
+
 
 const artistsRouter = require('./routes/artists')
 app.use('/artists', artistsRouter);
@@ -22,12 +20,12 @@ app.use('/artists', artistsRouter);
 const albumsRouter = require('./routes/albums')
 app.use('/albums', albumsRouter);
 
-const publishersRouter = require('./routes/publishers')
-app.use('/publishers', publishersRouter);
+// const publishersRouter = require('./routes/publishers')
+// app.use('/publishers', publishersRouter);
 
 // anything beginning with "/api" will go into this
-const apiRouter = require('./routes/api')
-app.use('/api', apiRouter);
+// const apiRouter = require('./routes/api')
+// app.use('/api', apiRouter);
 
 app.use((req, res) => {
     res.status(404).render('404');

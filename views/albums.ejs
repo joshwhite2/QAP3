@@ -2,25 +2,38 @@
     <%- include('./partials/head.ejs') %>
     <body>
         <%- include('./partials/nav.ejs') %>
-        <div class="actors content">
+        <div class="albums content">
             <form action="/albums" method="POST">
-                <b>Actors: </b></br> 
+                <h2>Albums: </h2></br> 
             <% if (theAlbums.length > 0) { %>
                 <% theAlbums.forEach(album => { %>
-                    <b><%= album.album_name %> <</b>
+                    <b><%= album.album_name %> </b>
+                    <b><%= album.artist_name %></b>
+                    <b><%= album.album_year %>   </b>
+                   
+
                     <a href="/album/<%=album._id%>/edit?Name=<%=album.album_name%>">edit</a>
-                    
-                    <a href="/artists/<%=artist._id%>/delete?Name=<%=actor.actor_name%>">edit</a>
-                    <a href="/artists/<%=artist._id%>/replace?Name=<%=actor.actor_name%>">edit</a>
+
+                    <a href="/albums/<%=album._id%>/delete?Name=<%=album.album_name%>">Delete</a>
+                    <a href="/albums/<%=album._id%>/replace?Name=<%=album.album_name%>">Replace name</a>
 
                     </br>
                     <% }) %>
             <% } %>
-            </br><label>Add Artist:</label></br>
+            </br><label>Add Album:</label></br>
             <label>Name:
-                <input type="text" id="artistName" name="Name" value="<%= locals.Name %>" required>
+                <input type="text" id="albumName" name="album_name" value="<%= locals.albumName %>" >
             </label>
            
+            <label>Artist:
+                <input type="text" id="albumArtist" name="artist_name" value="<%= locals.albumArtist %>" >
+            </label>
+            <label>Year:
+                <input type="text" id="albumYear" name="album_year" value="<%= locals.album_Year %>" >
+            </label>
+            <label>Publisher:
+                <input type="text" id="publisher" name="publisher_id" value="<%= locals.publisher_id %>" >
+            </label>
             </br>
             <button>POST</button>
         </form>

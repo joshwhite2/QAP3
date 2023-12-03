@@ -3,10 +3,16 @@
     <body>
         <%- include('./partials/nav.ejs') %>
         <div class="create content">
-            <form action="/actors/<%= locals.theId %>?_method=PUT" method="POST">
+            <form action="/albums/<%= locals.theId %>?_method=PUT" method="POST">
                 <label>Replace Album Names:</br>
-                    <input type="text" name="firstName" value="<%= locals.firstName %>" required>
-                    <input type="text" name="lastName" value="<%= locals.lastName %>" required>
+                    <b>name</b>
+                    <input type="text" name="album_name" value="<%= locals.albumName %>" >
+                    </br>
+                    <b>artist</b>
+                    <input type="text" name="artist_name" value="<%= locals.artistName %>" ></br><b>year</b>
+                    <input type="text" name="album_year" value="<%= locals.year %>" >
+                </br><b>publisher</b>
+                    <input type="text" name="publisher_id" value="<%= locals.publisher %>" >
                 </label></br>
                 <button>PUT</button>
             </form>

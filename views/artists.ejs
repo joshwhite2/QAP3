@@ -2,22 +2,22 @@
     <%- include('./partials/head.ejs') %>
     <body>
         <%- include('./partials/nav.ejs') %>
-        <div class="actors content">
-            <form action="/actors" method="POST">
-                <b>Actors: </b></br> 
-            <% if (theActors.length > 0) { %>
-                <% theActors.forEach(actor => { %>
-                    <b><%= actor.first_name %> <%= actor.last_name %></b>
-                    <a href="/artists/<%=artist._id%>/edit?Name=<%=actor.actor_name%>">edit</a>
-                    <a href="/artists/<%=artist._id%>/delete?Name=<%=actor.actor_name%>">edit</a>
-                    <a href="/artists/<%=artist._id%>/replace?Name=<%=actor.actor_name%>">edit</a>
+        <div class="artists content">
+            <form action="/artists" method="POST">
+                <b>artists: </b></br> 
+            <% if (theArtists.length > 0) { %>
+                <% theArtists.forEach(artist => { %>
+                    <b><%= artist.artist_name %></b>
+                    <a href="/artists/<%=artist._id%>/edit?Name=<%=artist.name%>">edit</a>
+                    <a href="/artists/<%=artist._id%>/delete?Name=<%=artist.artist_name%>">edit</a>
+                    <a href="/artists/<%=artist._id%>/replace?Name=<%=artist.artist_name%>">edit</a>
 
                     </br>
                     <% }) %>
             <% } %>
             </br><label>Add Artist:</label></br>
             <label>Name:
-                <input type="text" id="artistName" name="Name" value="<%= locals.Name %>" required>
+                <input type="text" id="artistName" name="artist_name" value="<%= locals.Name %>" required>
             </label>
            
             </br>

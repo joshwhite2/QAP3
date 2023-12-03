@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const artistsDal = require('../services/pg.artists.dal')
-// const artistsDal = require('../services/m.artists.dal')
+
 
 // https://localhost:3000/artists/
 router.get('/', async (req, res) => {
    
     try {
-        let theartists = await artistsDal.getArtists(); 
+        let theArtists = await artistsDal.getArtists(); 
         if(DEBUG) console.table(theArtists);
         res.render('artists', {theArtists});
     } catch {
@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
 
 router.get('/:id/replace', async (req, res) => {
     if(DEBUG) console.log('artist.Replace : ' + req.params.id);
-    res.render('artistPut.ejs', {Name: req.query.artist_name,  theId: req.params.id});
+    res.render('artistPut.ejs', {Name: req.query.artist_name, Atist: req.query.artist_birthday, Location: req.query.artist_location, Label: req.query.label_id, theId: req.params.id});
 });
 
 // https://localhost:3000/artists/205/edit
@@ -48,7 +48,7 @@ router.get('/:id/delete', async (req, res) => {
 router.post('/', async (req, res) => {
     if(DEBUG) console.log("artists.POST");
     try {
-        await artistsDal.addArtist(req.body.artist_name, );
+        await artistsDal.addArtist(req.body.artist_name, req.body.artist_birthday, req.body.artist_location, req.body.label_id);
         res.redirect('/artists/');
     } catch {
         // log this error to an error log file.
@@ -62,7 +62,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     if(DEBUG) console.log('artists.PUT: ' + req.params.id);
     try {
-        await artistsDal.putArtist(req.params.id, req.body.artist_ame) ;
+        await artistsDal.putArtist(req.params.id, req.body.artist_name, req.body.artist_birthday, req.body.artist_location, req.body.label_id); 
         res.redirect('/artists/');
     } catch {
         // log this error to an error log file.
@@ -72,7 +72,7 @@ router.put('/:id', async (req, res) => {
 router.patch('/:id', async (req, res) => {
     if(DEBUG) console.log('artists.PATCH: ' + req.params.id);
     try {
-        await artistsDal.patchArtist(req.params.id, req.body.artist_name);
+        await artistsDal.patchArtist(req.params.id, req.body.artist_name, req.body.artist_birthday, req.body.artist_location, req.body.label_id);
         res.redirect('/artists/');
     } catch {
         // log this error to an error log file.

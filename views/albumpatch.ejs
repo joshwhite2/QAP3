@@ -3,9 +3,10 @@
     <body>
         <%- include('./partials/nav.ejs') %>
         <div class="create content">
-            <form action="/actors/<%= locals.theId %>?_method=PATCH" method="POST">
+            <form action="/albums/<%= locals.theId %>?_method=PATCH" method="POST">
                 <label>Edit Albums Name:</br>
-                    <input type="text" name="albumName" value="<%= locals.firstName %>" required>
+                    <input type="text" name="album_name" value="<%= locals.Name %>" required>
+                    <input type="text" name="artist_name" value="<%= locals.Artist %>" required>
                     <input type="text" year="album_year" value="<%= locals.albumYear %>" required>
                 </label></br>
                 <button>PATCH</button>
