@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const albumsDal = require('../services/pg.albums.dal')
-// const albumsDal = require('../services/m.albums.dal')
+
 
 // https://localhost:3000/albums/
 router.get('/', async (req, res) => {
@@ -38,7 +38,7 @@ router.get('/:id/replace', async (req, res) => {
 router.get('/:id', async (req, res) => {
    
     try {
-        const analbum = await albumsDal.getAlbumByAlbumId(req.params.id); // from postgresql
+        const anAlbum = await albumsDal.getAlbumByAlbumId(req.params.id); // from postgresql
         if(DEBUG) console.log(`albums.router.get/:name ${anAlbum}`);
         if (anAlbum)
             res.render('album', {anAlbum});

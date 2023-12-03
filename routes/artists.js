@@ -31,13 +31,13 @@ router.get('/:id', async (req, res) => {
 
 router.get('/:id/replace', async (req, res) => {
     if(DEBUG) console.log('artist.Replace : ' + req.params.id);
-    res.render('artistPut.ejs', {Name: req.query.artist_name, Birthday: req.query.artist_birthday, Location: req.query.artist_location, Label: req.query.label_id, ID: req.params.id});
+    res.render('artistPut.ejs', {Name: req.query.artist_name, Birthday: req.query.artist_birthday, Location: req.query.artist_location, Label: req.query.label_id, ID:req.query.artist_id, theId: req.params.id});
 });
 
 // https://localhost:3000/artists/205/edit
 router.get('/:id/edit', async (req, res) => {
     if(DEBUG) console.log('artist.Edit : ' + req.params.id);
-    res.render('artistPatch.ejs', {Name: req.query.artist_name, Birthday: req.query.artist_birthday, Location: req.query.artist_location, Label: req.query.label_id, theId: req.params.id});
+    res.render('artistPatch.ejs', {Name: req.query.artist_name, Birthday: req.query.artist_birthday, Location: req.query.artist_location, Label: req.query.label_id, ID:req.query.artist_id, theId: req.params.id});
 });
 
 router.get('/:id/delete', async (req, res) => {
