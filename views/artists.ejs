@@ -1,0 +1,38 @@
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+    <body>
+        <%- include('./partials/nav.ejs') %>
+        <div class="artists content">
+            <form action="/artists" method="POST">
+                <b>artists: </b></br> 
+            <% if (theArtists.length > 0) { %>
+                <% theArtists.forEach(artist => { %>
+                    <b><%= artist.artist_name %></b>
+                    <a href="/artists/<%=artist._id%>/edit?Name=<%=artist.name%>">edit</a>
+                    <a href="/artists/<%=artist._id%>/delete?Name=<%=artist.artist_name%>">delete</a>
+                    <a href="/artists/<%=artist._id%>/replace?Name=<%=artist.artist_name%>">replace</a>
+
+                    </br>
+                    <% }) %>
+            <% } %>
+            </br><label>Add Artist:</label></br>
+            <label>Name:
+                <input type="text" id="artistName" name="artist_name" value="<%= theArtists[0].Name %>" required>
+            </label></br>
+            <label>Birthday:
+                <input type="text" id="artistBirthday" name="artist_birthday" value="<%= theArtists[1].Birthday %>" required>
+            </label></br>
+            <label>Location:
+                <input type="text" id="artistLocation" name="artist_location" value="<%= theArtists[2].Location %>" required>
+            </label></br>
+            <label>Label:
+                <input type="text" id="artistLabel" name="label_id" value="<%= locals.Label %>" required>
+            </label></br>
+           
+            </br>
+            <button>POST</button>
+        </form>
+        </div>
+    </body>
+    <%- include('./partials/foot.ejs') %>
+</html>

@@ -1,0 +1,15 @@
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+    <body>
+        <%- include('./partials/nav.ejs') %>z
+        <div class="album content">
+            <h2>Album:</h2>
+            <% if (anAlbum.length > 0) 
+                var album = anAlbum[0];{ %>
+                <h3><%= album.album_name %> 
+                </h3> 
+            <% } %>
+        </div>
+    </body>
+    <%- include('./partials/foot.ejs') %>
+</html>
