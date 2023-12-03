@@ -1,16 +1,19 @@
 <html lang="en">
     <%- include('./partials/head.ejs') %>
+   
     <body>
         <%- include('./partials/nav.ejs') %>
         <div class="artists content">
             <form action="/artists" method="POST">
-                <b>artists: </b></br> 
+                <b>ARTISTS: </b></br></b>
             <% if (theArtists.length > 0) { %>
                 <% theArtists.forEach(artist => { %>
-                    <b><%= artist.artist_name %></b>
+                    <b><%= artist.artist_name %></b></br>
+                    <b><%= artist.artist_birthday %></b></br>
+                    <b><%= artist.artist_location %></b></br>
                     <a href="/artists/<%=artist._id%>/edit?Name=<%=artist.name%>">edit</a>
-                    <a href="/artists/<%=artist._id%>/delete?Name=<%=artist.artist_name%>">edit</a>
-                    <a href="/artists/<%=artist._id%>/replace?Name=<%=artist.artist_name%>">edit</a>
+                    <a href="/artists/<%=artist._id%>/delete?Name=<%=artist.artist_name%>">delete</a>
+                    <a href="/artists/<%=artist._id%>/replace?Name=<%=artist.artist_name%>">replace</a>
 
                     </br>
                     <% }) %>
@@ -18,12 +21,25 @@
             </br><label>Add Artist:</label></br>
             <label>Name:
                 <input type="text" id="artistName" name="artist_name" value="<%= locals.Name %>" required>
-            </label>
+            </label><br/><br/>
+            <label>Birthday:
+                <input type="text" id="artistBirthday" name="artist_birthday" value="<%= locals.Birthday %>" required>
+            </label><br/><br/>
+            <label>Location:
+                <input type="text" id="artistLocation" name="artist_location" value="<%= locals.Location %>" required>
+            </label><br/><br/>
+            <label>Label:
+                <input type="text" id="artistLabel" name="label_id" value="<%= locals.Label %>" required>
+            </label><br/><br/>
+
+            <label>ID:
+                <input type="text" id="artistID" name="artist_id" value="<%= locals.ID %>" required>
+            </label><br/><br/>
            
             </br>
             <button>POST</button>
         </form>
         </div>
-    </body>
+    </body> 
     <%- include('./partials/foot.ejs') %>
 </html>

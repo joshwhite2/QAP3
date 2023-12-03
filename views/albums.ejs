@@ -1,5 +1,6 @@
 <html lang="en">
     <%- include('./partials/head.ejs') %>
+
     <body>
         <%- include('./partials/nav.ejs') %>
         <div class="albums content">
@@ -7,9 +8,11 @@
                 <h2>Albums: </h2></br> 
             <% if (theAlbums.length > 0) { %>
                 <% theAlbums.forEach(album => { %>
-                    <b><%= album.album_name %> </b>
-                    <b><%= album.artist_name %></b>
-                    <b><%= album.album_year %>   </b>
+                    <b><%= album.album_name %> </b></br>
+                    <b><%= album.artist_name %></b></br>
+                    <b><%= album.album_year %>   </b></br>
+
+                    
                    
 
                     <a href="/album/<%=album._id%>/edit?Name=<%=album.album_name%>">edit</a>
@@ -34,6 +37,7 @@
             <label>Publisher:
                 <input type="text" id="publisher" name="publisher_id" value="<%= locals.publisher_id %>" >
             </label>
+           
             </br>
             <button>POST</button>
         </form>

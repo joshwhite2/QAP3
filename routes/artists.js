@@ -31,13 +31,13 @@ router.get('/:id', async (req, res) => {
 
 router.get('/:id/replace', async (req, res) => {
     if(DEBUG) console.log('artist.Replace : ' + req.params.id);
-    res.render('artistPut.ejs', {Name: req.query.artist_name, Atist: req.query.artist_birthday, Location: req.query.artist_location, Label: req.query.label_id, theId: req.params.id});
+    res.render('artistPut.ejs', {Name: req.query.artist_name, Atist: req.query.artist_birthday, Location: req.query.artist_location, Label: req.query.label_id, ID: req.params.id});
 });
 
 // https://localhost:3000/artists/205/edit
 router.get('/:id/edit', async (req, res) => {
     if(DEBUG) console.log('artist.Edit : ' + req.params.id);
-    res.render('artistPatch.ejs', {name: req.query.artist_name, theId: req.params.id});
+    res.render('artistPatch.ejs', {Name: req.query.artist_name, Atist: req.query.artist_birthday, Location: req.query.artist_location, Label: req.query.label_id, theId: req.params.id});
 });
 
 router.get('/:id/delete', async (req, res) => {
@@ -48,7 +48,7 @@ router.get('/:id/delete', async (req, res) => {
 router.post('/', async (req, res) => {
     if(DEBUG) console.log("artists.POST");
     try {
-        await artistsDal.addArtist(req.body.artist_name, req.body.artist_birthday, req.body.artist_location, req.body.label_id);
+        await artistsDal.addArtist(req.params.id, req.body.artist_id, req.body.artist_name, req.body.artist_birthday, req.body.artist_location, req.body.label_id);
         res.redirect('/artists/');
     } catch {
         // log this error to an error log file.
@@ -56,8 +56,6 @@ router.post('/', async (req, res) => {
     } 
 });
 
-// PUT, PATCH, and DELETE are part of HTTP, not a part of HTML
-// Therefore, <form method="PUT" ...> doesn't work, but it does work for RESTful API
 
 router.put('/:id', async (req, res) => {
     if(DEBUG) console.log('artists.PUT: ' + req.params.id);
@@ -69,6 +67,8 @@ router.put('/:id', async (req, res) => {
         res.render('503');
     }
 });
+
+
 router.patch('/:id', async (req, res) => {
     if(DEBUG) console.log('artists.PATCH: ' + req.params.id);
     try {
