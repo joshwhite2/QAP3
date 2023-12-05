@@ -52,7 +52,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     if(DEBUG) console.log('ROUTE: /api/albums PUT ' + req.params.id);
     try {
-        await albumsDal.putAlbum(req.params.id, req.body.album_name, req.body.artist_name, req.body.album_year, req.body.publisher_id);
+        await albumsDal.putAlbum(req.params.id, req.body.album_year, req.body.publisher_id);
         res.statusCode = 200;
         res.json({message: "OK", status: 200});
     } catch {

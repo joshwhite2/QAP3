@@ -3,12 +3,16 @@
     <body>
         <%- include('./partials/nav.ejs') %>
         <div class="create content">
+            
             <form action="/artists/<%= locals.theId %>?_method=DELETE" method="POST">
                 <label>Are you sure you want to delete this Artist?</br>
-                    <%= locals.theName %>
+                    <%= locals.Name %>
                 </label>
                 <button>DELETE</button>
             </form>
+            
+            
+            
         </div>
     </body>
     <%- include('./partials/foot.ejs') %>

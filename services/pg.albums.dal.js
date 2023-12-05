@@ -62,11 +62,11 @@ var deleteAlbum = function(id) {
     }); 
   });
 };
-var putAlbum = function(id, albumName) {
+var putAlbum = function(id, album_year, publisher_id) {
     if(DEBUG) console.log("albums.pg.dal.putAlbum()");
     return new Promise(function(resolve, reject) {
-      const sql = "UPDATE public.album SET album_name=$2 WHERE album_id=$1;";
-      dal.query(sql, [id, albumName], (err, result) => {
+      const sql = "UPDATE public.album SET album_year=$2, publisher_id=$3 WHERE album_id=$1;";
+      dal.query(sql, [id, album_year, publisher_id], (err, result) => {
         if (err) {
           reject(err);
         } else {

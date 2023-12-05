@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
 
 router.get('/:id/replace', async (req, res) => {
     if(DEBUG) console.log('album.Replace : ' + req.params.id);
-    res.render('albumPut.ejs', {Name: req.query.album_name, Artist: req.query.artist_name, Year: req.query.album_year,  theId: req.params.id});
+    res.render('albumPut.ejs', {Year: req.query.album_year, Publisher: req.query.publisher_id,  theId: req.params.id});
 });
 
 
@@ -81,11 +81,12 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     if(DEBUG) console.log('albums.PUT: ' + req.params.id);
     try {
-        await albumsDal.putAlbum(req.params.id, req.body.album_name, req.body.artist_name, req.body.album_year, req.body.publisher_id); ;
+        await albumsDal.putAlbum(req.params.id, req.body.album_year, req.body.publisher_id); ;
         res.redirect('/albums/');
     } catch {
         // log this error to an error log file.
         res.render('503');
+        res.json({message: "Service Unavailable", status: 503});
     }
 });
 router.patch('/:id', async (req, res) => {

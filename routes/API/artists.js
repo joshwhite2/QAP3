@@ -15,10 +15,10 @@ router.get('/', async (req, res) => {
     }
 });
 // api/artists/:id
-router.get('/:id', async (req, res) => {
-    if(DEBUG) console.log('ROUTE: /api/artists/:id GET ' + req.url);
+router.get('/:artist_name', async (req, res) => {
+    if(DEBUG) console.log('ROUTE: /api/artists/:artist_name GET ' + req.url);
     try {
-        let anArtist = await artistsDal.getArtistByartistId(req.params.id); 
+        let anArtist = await artistsDal.getArtistByartistName(req.params.artist_name); 
         if (anArtist.length === 0) {
             // log this error to an error log file.
             res.statusCode = 404;
@@ -38,7 +38,7 @@ router.post('/', async (req, res) => {
         // console.log(req);
     }
     try {
-        await artistsDal.addArtist(req.body.artist_name);
+        await artistsDal.addArtist(req.body.artist_name, req.body.artist_birthday, req.body.artist_location, req.body.label_id, req.body.artist_id);
         res.statusCode = 201;
         res.json({message: "Created", status: 201});
     } catch {
@@ -47,8 +47,8 @@ router.post('/', async (req, res) => {
         res.json({message: "Service Unavailable", status: 503});
     } 
 });
-router.put('/:id', async (req, res) => {
-    if(DEBUG) console.log('ROUTE: /api/artists PUT ' + req.params.id);
+router.put('/:artist_name', async (req, res) => {
+    if(DEBUG) console.log('ROUTE: /api/artists PUT ' + req.params.artist_name);
     try {
         await artistsDal.putArtist(req.params.id, req.body.artist_name);
         res.statusCode = 200;
@@ -59,10 +59,10 @@ router.put('/:id', async (req, res) => {
         res.json({message: "Service Unavailable", status: 503});
     }
 });
-router.patch('/:id', async (req, res) => {
-    if(DEBUG) console.log('ROUTE: /api/artists PATCH ' + req.params.id);
+router.patch('/:artist_name', async (req, res) => {
+    if(DEBUG) console.log('ROUTE: /api/artists PATCH ' + req.params.artist_name);
     try {
-        await artistsDal.patchArtist(req.params.id, req.body.artist_name);
+        await artistsDal.patchArtist(req.params.artist_name, req.body.artist_name);
         res.statusCode = 200;
         res.json({message: "OK", status: 200});
     } catch {
@@ -71,10 +71,10 @@ router.patch('/:id', async (req, res) => {
         res.json({message: "Service Unavailable", status: 503});
     }
 });
-router.delete('/:id', async (req, res) => {
-    if(DEBUG) console.log('ROUTE: /api/artists DELETE ' + req.params.id);
+router.delete('/:artist_name', async (req, res) => {
+    if(DEBUG) console.log('ROUTE: /api/artists DELETE ' + req.params.artist_name);
     try {
-        await artistsDal.deleteArtist(req.params.id);
+        await artistsDal.deleteArtist(req.params.artist_name);
         res.statusCode = 200;
         res.json({message: "OK", status: 200});
     } catch {
@@ -83,12 +83,5 @@ router.delete('/:id', async (req, res) => {
         res.json({message: "Service Unavailable", status: 503});
     }
 });
-// // list the active api routes
-// if(DEBUG) {
-//     router.stack.forEach(function(r){
-//         if (r.route && r.route.path){
-//         console.log(r.route.path)
-//         }
-//     });
-// }
+
 module.exports = router;

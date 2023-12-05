@@ -2,10 +2,8 @@ const express = require('express');
 const router = express.Router();
 const artistsDal = require('../services/pg.artists.dal')
 
-
 // https://localhost:3000/artists/
 router.get('/', async (req, res) => {
-   
     try {
         let theArtists = await artistsDal.getArtists(); 
         if(DEBUG) console.table(theArtists);
@@ -18,7 +16,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
    
     try {
-        const anArtist = await artistsDal.getArtistById(req.params.id); // from postgresql
+        const anArtist = await artistsDal.getArtistByArtistName(req.params.artist_name); // from postgresql
         if(DEBUG) console.log(`artists.router.get/:name ${anArtist}`);
         if (anArtist)
             res.render('artist', {anArtist});
@@ -29,19 +27,19 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.get('/:id/replace', async (req, res) => {
-    if(DEBUG) console.log('artist.Replace : ' + req.params.id);
+router.get('/:artist_name/replace', async (req, res) => {
+    if(DEBUG) console.log('artist.Replace : ' + req.params.artist_name);
     res.render('artistPut.ejs', {Name: req.query.artist_name, Birthday: req.query.artist_birthday, Location: req.query.artist_location, Label: req.query.label_id, ID:req.query.artist_id, theId: req.params.id});
 });
 
 // https://localhost:3000/artists/205/edit
-router.get('/:id/edit', async (req, res) => {
-    if(DEBUG) console.log('artist.Edit : ' + req.params.id);
-    res.render('artistPatch.ejs', {Name: req.query.artist_name, Birthday: req.query.artist_birthday, Location: req.query.artist_location, Label: req.query.label_id, ID:req.query.artist_id, theId: req.params.id});
+router.get('/:id/artist_name/edit', async (req, res) => {
+    if(DEBUG) console.log('artist.Edit : ' + req.params.artist_name);
+    res.render('artistPatch.ejs', {Location: req.query.artist_location,  ID:req.query.artist_id, theId: req.params.id});
 });
 
-router.get('/:id/delete', async (req, res) => {
-    if(DEBUG) console.log('artist.Delete : ' + req.params.id);
+router.get('/:artist_name/delete', async (req, res) => {
+    if(DEBUG) console.log('artist.Delete : ' + req.params.artist_name);
     res.render('artistDelete.ejs', {Name: req.query.artist_name, ID: req.params.id});
 });
 
@@ -75,20 +73,20 @@ router.put('/:id', async (req, res) => {
 router.patch('/:id', async (req, res) => {
     if(DEBUG) console.log('artists.PATCH: ' + req.params.id);
     try {
-        await artistsDal.patchArtist(req.params.id, req.body.artist_name, req.body.artist_birthday, req.body.artist_location, req.body.label_id, req.body.artist_id);
+        await artistsDal.patchArtist(req.params.id, req.body.artist_location, req.body.artist_id);
         res.redirect('/artists/');
     } catch {
         // log this error to an error log file.
         res.render('503');
     }
 });
-router.delete('/:id', async (req, res) => {
-    if(DEBUG) console.log('artists.DELETE: ' + req.params.id);
+router.delete('/:artist_name', async (req, res) => {
+    if (DEBUG) console.log('artists.DELETE: ' + req.params.artist_name);
     try {
-        await artistsDal.deleteArtist(req.params.id);
+        await artistsDal.deleteArtist(req.params.artist_name);
         res.redirect('/artists/');
     } catch (err) {
-        if(DEBUG) console.error(err);
+        if (DEBUG) console.error(err);
         // log this error to an error log file.
         res.render('503');
     }

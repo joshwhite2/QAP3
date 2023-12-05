@@ -1,13 +1,17 @@
 <html lang="en">
-    <%- include('./partials/head.ejs') %>
+    <%- include('./partials/head.ejs', {cssPath: `/styles.css`}) %>
 
     <body>
+  
         <%- include('./partials/nav.ejs') %>
-        <div class="albums content">
+
+        <div class="albums-content">
             <form action="/albums" method="POST">
                 <h2>Albums: </h2></br> 
+               
             <% if (theAlbums.length > 0) { %>
                 <% theAlbums.forEach(album => { %>
+                    <div class = "box">
                     <b><%= album.album_name %> </b></br>
                     <b><%= album.artist_name %></b></br>
                     <b><%= album.album_year %>   </b></br>
@@ -15,12 +19,16 @@
                     
                    
 
+                       
                     <a href="/album/<%=album._id%>/edit?Name=<%=album.album_name%>">edit</a>
 
                     <a href="/albums/<%=album._id%>/delete?Name=<%=album.album_name%>">Delete</a>
                     <a href="/albums/<%=album._id%>/replace?Name=<%=album.album_name%>">Replace name</a>
-
+              
                     </br>
+                </div>
+            </div>
+           
                     <% }) %>
             <% } %>
             </br><label>Add Album:</label></br>
