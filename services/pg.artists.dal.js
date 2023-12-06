@@ -92,45 +92,7 @@ var putArtist = function(artist_name, artist_birthday, artist_location, label_id
     });
   };
   
-// var putArtist = function(artist_name, artist_birthday, artist_location, label_id, artist_id) {
-//   if(DEBUG) console.log("artists.pg.dal.putArtist()");
-//   return new Promise(function(resolve, reject) {
-//     const sql = "UPDATE public.artist SET artist_name=$1, WHERE artist_id=$5;";
-//     dal.query(sql, [ artist_name, artist_birthday, artist_location, label_id, artist_id], (err, result) => {
-//       if (err) {
-//           reject(err);
-//         } else {
-//           resolve(result.rows);
-//         }
-//     }); 
-//   });
-// };
-// var patchArtist = function(artist_name, artist_birthday, artist_location, label_id, artist_id) {
-//   if(DEBUG) console.log("artists.pg.dal.patchArtist()");
-//   return new Promise(function(resolve, reject) {
-//     const sql = "UPDATE public.artist SET artist_name= $1 WHERE artist_id=$1;";
-//     dal.query(sql, [artist_name, artist_birthday, artist_location, label_id, artist_id], (err, result) => {
-//       if (err) {
-//           reject(err);
-//         } else {
-//           resolve(result.rows);
-//         }
-//     }); 
-//   });
-// };
-// var deleteArtist = function(id) {
-//   if(DEBUG) console.log("artists.pg.dal.deleteArtist()");
-//   return new Promise(function(resolve, reject) {
-//     const sql = "DELETE FROM public.artist WHERE artist_id = $5;";
-//     dal.query(sql, [id], (err, result) => {
-//       if (err) {
-//           reject(err);
-//         } else {
-//           resolve(result.rows);
-//         }
-//     }); 
-//   });
-// };
+
 
 module.exports = {
     getArtists,

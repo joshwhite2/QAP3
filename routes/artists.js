@@ -27,69 +27,8 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.get('/:artist_name/replace', async (req, res) => {
-    if(DEBUG) console.log('artist.Replace : ' + req.params.artist_name);
-    res.render('artistPut.ejs', {Name: req.query.artist_name, Birthday: req.query.artist_birthday, Location: req.query.artist_location, Label: req.query.label_id, ID:req.query.artist_id, theId: req.params.id});
-});
-
-// https://localhost:3000/artists/205/edit
-router.get('/:id/artist_name/edit', async (req, res) => {
-    if(DEBUG) console.log('artist.Edit : ' + req.params.artist_name);
-    res.render('artistPatch.ejs', {Location: req.query.artist_location,  ID:req.query.artist_id, theId: req.params.id});
-});
-
-router.get('/:artist_name/delete', async (req, res) => {
-    if(DEBUG) console.log('artist.Delete : ' + req.params.artist_name);
-    res.render('artistDelete.ejs', {Name: req.query.artist_name, ID: req.params.id});
-});
-
-router.post('/', async (req, res) => {
-    if(DEBUG) console.log("artists.POST");
-    try {
-        await artistsDal.addArtist( req.body.artist_name, req.body.artist_birthday, req.body.artist_location, req.body.label_id, req.body.artist_id);
-        
-       
-        res.redirect('/artists/');
-
-    } catch {
-        // log this error to an error log file.
-        res.render('503');
-    } 
-});
 
 
-router.put('/:id', async (req, res) => {
-    if(DEBUG) console.log('artists.PUT: ' + req.params.id);
-    try {
-        await artistsDal.putArtist(req.params.id, req.body.artist_name, req.body.artist_birthday, req.body.artist_location, req.body.label_id, req.body.artist_id); 
-        res.redirect('/artists/');
-    } catch {
-        // log this error to an error log file.
-        res.render('503');
-    }
-});
 
-
-router.patch('/:id', async (req, res) => {
-    if(DEBUG) console.log('artists.PATCH: ' + req.params.id);
-    try {
-        await artistsDal.patchArtist(req.params.id, req.body.artist_location, req.body.artist_id);
-        res.redirect('/artists/');
-    } catch {
-        // log this error to an error log file.
-        res.render('503');
-    }
-});
-router.delete('/:artist_name', async (req, res) => {
-    if (DEBUG) console.log('artists.DELETE: ' + req.params.artist_name);
-    try {
-        await artistsDal.deleteArtist(req.params.artist_name);
-        res.redirect('/artists/');
-    } catch (err) {
-        if (DEBUG) console.error(err);
-        // log this error to an error log file.
-        res.render('503');
-    }
-});
 
 module.exports = router
