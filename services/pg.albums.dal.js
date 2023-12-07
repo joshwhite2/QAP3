@@ -49,20 +49,20 @@ var addAlbum = function(albumName, artistName, album_year, publisher) {
     });
   };
 
-var deleteAlbum = function(id) {
-  if(DEBUG) console.log("albums.pg.dal.deleteAlbum()");
-  return new Promise(function(resolve, reject) {
-    const sql = "DELETE FROM public.album WHERE album_id = $1;";
-    dal.query(sql, [id], (err, result) => {
-      if (err) {
-          reject(err);
-        } else {
-          resolve(result.rows);
-        }
-    }); 
-  });
-};
-var putAlbum = function(id, albumName) {
+  var deleteAlbum = function(id) {
+    if(DEBUG) console.log("albums.pg.dal.deleteAlbum()");
+    return new Promise(function(resolve, reject) {
+      const sql = "DELETE FROM public.album WHERE album_id = $1;";
+      dal.query(sql, [id], (err, result) => {
+        if (err) {
+            reject(err);
+          } else {
+            resolve(result.rows);
+          }
+      }); 
+    });
+  };
+  var putAlbum = function(id, albumName) {
     if(DEBUG) console.log("albums.pg.dal.putAlbum()");
     return new Promise(function(resolve, reject) {
       const sql = "UPDATE public.album SET album_name=$2 WHERE album_id=$1;";

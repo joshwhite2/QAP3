@@ -4,7 +4,7 @@
         <%- include('./partials/nav.ejs') %>
         <div class="create content">
             <form action="/albums/<%= locals.theId %>?_method=PATCH" method="POST">
-                <label>Edit Album Name:</br>
+                <label>Edit Album:</br>
                     <input type="text" name="album_name" value="<%= locals.Name %>" required>
                    
                 </label></br>

@@ -4,15 +4,13 @@
         <%- include('./partials/nav.ejs') %>
         <div class="create content">
             <form action="/albums/<%= locals.theId %>?_method=PUT" method="POST">
-                <label>Replace Album Year and Publisher</br>
-                    
-                  
-                    </br><b>year</b>
-                    <input type="text" name="album_year" value="<%= locals.year %>" >
-                </label>
-                <br><b>publisher</b>
-                    <input type="text" name="publisher_id" value="<%= locals.publisher %>" >
-                </label><br>
+                <label>Replace Album Names:</br>
+                    <b>name</b>
+                    <input type="text" name="album_name" value="<%= locals.albumName %>" >
+                    </br>
+                 
+                
+              
                 <button>PUT</button>
             </form>
         </div>
