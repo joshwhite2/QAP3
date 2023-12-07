@@ -8,7 +8,7 @@
             <form action="/artists" method="POST">
               
                 <div class ="section">
-            <h3 >Add an Artist</h3>
+            <b>Add an Artist</b>
             <label>Name:
                 <input type="text" id="artistName" name="artist_name" value="<%= theArtists[0].Name %>" required>
             </label>
@@ -29,29 +29,35 @@
         </form>
         </div>
        
+       
         <h2>Artists:</h2> </br></br> 
-        
+        <div class="content-container">
            
 
             <% if (theArtists.length > 0) { %>
                 <% theArtists.forEach(artist => { %>
-                    <div class ="container">
+                   
                     <div class = "box">
                     <b><%= artist.artist_name %></b>
-                   
+                   <b><%= artist.artist_birthday %></b>
+                   <b><%= artist.artist_location %></b>
+                  
                         
-                 
-                   </div>   
+                    
+                    
 
-                </div>
           
 
                     </br>
+                </div>  
                     <% }) %>
             <% } %>
-        </container>
+       
             
         </div>
+ 
     </body>
+    <div class = "footer">
     <%- include('./partials/foot.ejs') %>
+    </div>
 </html>

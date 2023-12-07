@@ -46,29 +46,27 @@ h1{
 
 .container {
     max-width: 1200px;
+   
     background-color: aqua;
     padding: 20px;
     justify-content: space-between;
     display: flex;
     flex-direction: row;
 }
-
-.albums-content {
-    background-color: rgb(91, 207, 172);
-    width: 110px;
-    padding: 20px;
-    margin-bottom: 20px;
-    text-align: center;
-    font-family: 'Eczar', serif;
-    justify-content: space-between;
-    display: flex;
-    flex-direction: column;
-  
+.content-container {
+    display: grid;
+   
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    text-align: center; 
 }
 
+
 .section {
-    background-color: rgb(224, 43, 206); 
-    font-family: eczar;
+    background-color: rgb(252, 125, 237); 
+    color:white;
+    font-family: 'Eczar', serif;
     margin-bottom: 40px;
     justify-content: space-around;
     display: flex;
@@ -84,14 +82,18 @@ h1{
 .box {
     background-color: rgb(221, 77, 246); /* Dark gray box */
     padding: 20px;
+    display: inline-block;
     margin-bottom: 20px;
     text-align: center;
     font-family: 'Eczar', serif;
-    width: 100px;
+    /* width: 100px;
+    height: 250px; */
+    border: solid 5px rgb(91, 207, 172)
 }
 
+
 .footer {
-    background-color: #333; /* Dark gray footer */
+    background-color: rgb(252, 125, 237); 
     padding: 10px;
     text-align: center;
     position: fixed;

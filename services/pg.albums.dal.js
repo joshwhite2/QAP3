@@ -37,7 +37,7 @@ var addAlbum = function(albumName, artistName, album_year, publisher) {
     if(DEBUG) console.log("albums.pg.dal.addAlbum()");
     return new Promise(function(resolve, reject) {
       const sql = "INSERT INTO public.album(album_name, artist_name, album_year, publisher_id) \
-          VALUES ($1, $2, $3, $4);";
+          VALUES ($2, $3, $4, $5);";
       dal.query(sql, [albumName, artistName, album_year, publisher], (err, result) => {
         if (err) {
             if(DEBUG) console.log(err);
@@ -77,19 +77,6 @@ var addAlbum = function(albumName, artistName, album_year, publisher) {
   
   };
   
-  var patchAlbum = function(id, albumName) {
-    if(DEBUG) console.log("albums.pg.dal.patchAlbum()");
-    return new Promise(function(resolve, reject) {
-      const sql = "UPDATE public.album SET album_name=$2 WHERE album_id=$1;";
-      dal.query(sql, [id, albumName], (err, result) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(result.rows);
-        }
-      }); 
-    });
-  };
 module.exports = {
     getAlbums,
     getAlbumByAlbumId,

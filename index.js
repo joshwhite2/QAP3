@@ -20,12 +20,6 @@ app.use('/artists', artistsRouter);
 const albumsRouter = require('./routes/albums')
 app.use('/albums', albumsRouter);
 
-// const publishersRouter = require('./routes/publishers')
-// app.use('/publishers', publishersRouter);
-
-// anything beginning with "/api" will go into this
-// const apiRouter = require('./routes/api')
-// app.use('/api', apiRouter);
 
 app.use((req, res) => {
     res.status(404).render('404');

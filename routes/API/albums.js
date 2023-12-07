@@ -61,18 +61,7 @@ router.put('/:id', async (req, res) => {
         res.json({message: "Service Unavailable", status: 503});
     }
 });
-router.patch('/:id', async (req, res) => {
-    if(DEBUG) console.log('ROUTE: /api/albums PATCH ' + req.params.id);
-    try {
-        await albumsDal.patchAlbum(req.params.id, req.body.album_name, req.body.artist_name, req.body.album_year, req.body.publisher_id);
-        res.statusCode = 200;
-        res.json({message: "OK", status: 200});
-    } catch {
-        // log this error to an error log file.
-        res.statusCode = 503;
-        res.json({message: "Service Unavailable", status: 503});
-    }
-});
+
 router.delete('/:id', async (req, res) => {
     if(DEBUG) console.log('ROUTE: /api/albums DELETE ' + req.params.id);
     try {
@@ -85,12 +74,5 @@ router.delete('/:id', async (req, res) => {
         res.json({message: "Service Unavailable", status: 503});
     }
 });
-// // list the active api routes
-// if(DEBUG) {
-//     router.stack.forEach(function(r){
-//         if (r.route && r.route.path){
-//         console.log(r.route.path)
-//         }
-//     });
-// }
+
 module.exports = router;

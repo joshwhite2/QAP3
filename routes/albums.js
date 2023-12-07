@@ -68,16 +68,6 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// PATCH route for updating album data
-router.patch('/:id', async (req, res) => {
-    if (DEBUG) console.log('albums.PATCH: ' + req.params.id);
-    try {
-        await albumsDal.patchAlbum(req.params.id, req.body.album_name);
-        res.redirect('/albums/');
-    } catch {
-        res.render('503');
-    }
-});
 
 // DELETE route for deleting an album
 router.delete('/:id', async (req, res) => {
