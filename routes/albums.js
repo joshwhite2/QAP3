@@ -67,6 +67,7 @@ router.put('/:id', async (req, res) => {
         res.render('503');
     }
 });
+//yes
 
 
 // DELETE route for deleting an album
